@@ -6,11 +6,11 @@ r = sr.Recognizer()
 # Set the microphone as the audio source
 microphone = sr.Microphone()
 
-# Adjust the microphone for ambient noise levels
+# Adjust the microphone for normal noise levels
 with microphone as source:
     r.adjust_for_ambient_noise(source)
 
-# Listen for audio and perform speech recognition
+
 print("Listening...")
 
 # Start the microphone input
@@ -19,7 +19,6 @@ with microphone as source:
     audio = r.listen(source)
 
 try:
-    # Perform speech recognition on the captured audio
     text = r.recognize_google(audio)
     print("Recognized speech:", text)
 except sr.UnknownValueError:

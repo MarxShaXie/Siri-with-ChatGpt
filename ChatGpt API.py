@@ -1,6 +1,6 @@
 import openai
 
-openai.api_key = "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"
+openai.api_key = "api-key"
 model_engine = "text-davinci-003" 
 
 response = openai.ChatCompletion.create(
