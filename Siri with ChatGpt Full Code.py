@@ -1,5 +1,28 @@
 import speech_recognition as sr
 import pyttsx3
+import openai
+
+# Set up your OpenAI API credentials
+openai.api_key = 'api key'
+
+def ask_question(question):
+    # Define the prompt with the user's question
+    prompt = f"{question}\nAnswer:"
+
+    # Generate the response using OpenAI API
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=100,
+        n=1,
+        stop=None,
+        temperature=0.5
+    )
+
+    # Extract the answer from the API response
+    answer = response.choices[0].text.strip().split('\n')[0]
+
+    return answer
 
 # Initialize the text-to-speech engine
 engine = pyttsx3.init()
@@ -36,11 +59,11 @@ while flag:
         text_to_speech("Recognized speech:")
         text_to_speech(text)
 
-        # Ask the user to confirm if the recognized speech is correct
-        text_to_speech("Was the above text correct?")
-
         while True:
             with microphone as source:
+
+                # Ask the user to confirm if the recognized speech is correct
+                text_to_speech("Was the above text correct?")
 
                 # Listen for the user's response
                 response_audio = r.listen(source)
@@ -55,8 +78,12 @@ while flag:
                 else:
                     text_to_speech("Invalid Answer, Please answer again")
                     continue
-                continue
     except sr.UnknownValueError:
         text_to_speech("Speech recognition could not understand audio, Capturing audio again")
     except sr.RequestError as e:
         text_to_speech("Could not request results from speech recognition service; {0}".format(e))
+
+answer=ask_question(text)
+
+text_to_speech("Here's what ChatGpt says:")
+text_to_speech(answer)

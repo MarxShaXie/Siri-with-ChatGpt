@@ -26,11 +26,11 @@ while flag:
         text = r.recognize_google(audio)
         print("Recognized speech:", text)
 
-        # Ask the user to confirm if the recognized speech is correct
-        print("Was the above text correct? (Yes/No)")
-
         while True:
             with microphone as source:
+                
+                # Ask the user to confirm if the recognized speech is correct
+                print("Was the above text correct? (Yes/No)")
 
                 # Listen for the user's response
                 response_audio = r.listen(source)
