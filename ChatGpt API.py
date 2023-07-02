@@ -1,7 +1,14 @@
 import openai
 
+# Specify the path to the API key file
+api_key_file = "C:/api_key.txt"
+
+# Read the OpenAI API key from the file
+with open(api_key_file, "r") as file:
+    api_key = file.read().strip()
+
 # Set up your OpenAI API credentials
-openai.api_key = 'api-key'
+openai.api_key = api_key
 
 def ask_question(question):
     # Define the prompt with the user's question
