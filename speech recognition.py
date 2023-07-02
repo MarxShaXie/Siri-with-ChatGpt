@@ -47,7 +47,8 @@ while flag:
                 else:
                     print("User:", response_text)
                     print("Invalid Answer, Capturing audio again...")
-                    break
+                    continue
+                continue
     except sr.UnknownValueError:
         print("Speech recognition could not understand audio, Capturing audio again")
     except sr.RequestError as e:
